@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcularIR.Controller", "CalcularIR.Controller\CalcularIR.Controller.csproj", "{E0237DBE-32CE-41A2-8411-21F50CB5037F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcularIR", "CalcularIR\CalcularIR.csproj", "{C046ABAE-AF62-401A-A6E0-E53053E4628D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcularIR.Model", "CalcularIR.Model\CalcularIR.Model.csproj", "{2319270A-71BC-444B-9C23-5AFC37AC8F4F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0237DBE-32CE-41A2-8411-21F50CB5037F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0237DBE-32CE-41A2-8411-21F50CB5037F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0237DBE-32CE-41A2-8411-21F50CB5037F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0237DBE-32CE-41A2-8411-21F50CB5037F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C046ABAE-AF62-401A-A6E0-E53053E4628D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C046ABAE-AF62-401A-A6E0-E53053E4628D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C046ABAE-AF62-401A-A6E0-E53053E4628D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C046ABAE-AF62-401A-A6E0-E53053E4628D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2319270A-71BC-444B-9C23-5AFC37AC8F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2319270A-71BC-444B-9C23-5AFC37AC8F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2319270A-71BC-444B-9C23-5AFC37AC8F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2319270A-71BC-444B-9C23-5AFC37AC8F4F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
