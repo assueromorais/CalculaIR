@@ -43,6 +43,12 @@
     <Compile Include="CalculadoraIR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CalcularIR.Model\CalcularIR.Model.csproj">
+      <Project>{2319270a-71bc-444b-9c23-5afc37ac8f4f}</Project>
+      <Name>CalcularIR.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

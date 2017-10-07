@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aliquota.cs" />
     <Compile Include="Contribuinte.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

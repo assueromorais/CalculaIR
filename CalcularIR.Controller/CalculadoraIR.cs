@@ -1,4 +1,8 @@
 ﻿using System.Linq;
+using CalcularIR.Model;
+using System.Collections.Generic;
+using System;
+
 namespace CalcularIR.Controller
 {
     /// <summary>
@@ -6,34 +10,53 @@ namespace CalcularIR.Controller
     /// </summary>
     public class CalculadoraIR
     {
-        private double SalarioMinimo = 0.0;
+        public double SalarioMinimo = 0.0;
+        public List<Aliquota> Aliquotas = new List<Aliquota>();
+        public List<Func<Contribuinte, double>> Descontos = new List<Func<Contribuinte, double>>();
 
         public CalculadoraIR(double salarioMinimo)
         {
             SalarioMinimo = salarioMinimo;
         }
 
-        public double CalcularIR(double rendaBrutaMensal, int dependentes)
+        public double CalcularIR(ref Contribuinte contribuinte)
         {
+            double descontos = CalcularDescontos(contribuinte);
+            double aliquota = 0.0;
             // Atribui desconto por dependente.
-            double rendaLiquidaMensal = rendaBrutaMensal - (dependentes * .05 * SalarioMinimo);
-            double aliquota = DefineAliquota(rendaLiquidaMensal);
-            return rendaLiquidaMensal * aliquota;
+            contribuinte.RendaLiquidaMensal = contribuinte.RendaBrutaMensal - descontos;
+            aliquota = DefineAliquota(contribuinte.RendaLiquidaMensal);
+            contribuinte.ImpostoDeRendaDevido = contribuinte.RendaLiquidaMensal * aliquota;
+            return contribuinte.ImpostoDeRendaDevido;
         }
 
+        public void AdicionarDesconto(Func<Contribuinte, double> calculoDesconto)
+        {
+            Descontos.Add(calculoDesconto);
+        }
+
+        public void AdicionarAliquota(Aliquota aliquota)
+        {
+            Aliquotas.Add(aliquota);
+        }
+
+        /// <summary>
+        /// Identifiqua qual alíquota utilizar para a renda líquida recebida.
+        /// </summary>
+        /// <param name="rendaLiquida">Renda líquida do contribuinte.</param>
+        /// <returns></returns>
         private double DefineAliquota(double rendaLiquida)
         {
-            if (rendaLiquida <= SalarioMinimo * 2)
-                return 0;
-            else if (rendaLiquida <= SalarioMinimo * 4)
-                return 0.075;
-            else if (rendaLiquida <= SalarioMinimo * 5)
-                return 0.15;
-            else if (rendaLiquida <= SalarioMinimo * 7)
-                return 0.225;
-            else
-                return 0.275;
+            Aliquota aliquota = Aliquotas.First(a => rendaLiquida >= a.QuantidadeSalariosPiso * SalarioMinimo && (rendaLiquida < a.QuantidadeSalariosTeto * SalarioMinimo || a.QuantidadeSalariosTeto == 0));
+            return aliquota.Valor;
         }
 
+        public double CalcularDescontos(Contribuinte contribuinte)
+        {
+            double descontos = 0.0;
+            for (int i = 0; i < Descontos.Count; i++)
+                descontos += Descontos[i](contribuinte);
+            return descontos;
+        }
     }
 }

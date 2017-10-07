@@ -10,6 +10,7 @@
         public string Nome { get; set; }
         public int TotalDependentes { get; set; }
         public double RendaBrutaMensal { get; set; }
+        public double RendaLiquidaMensal { get; set; }
         public double ImpostoDeRendaDevido { get; set; }
     }
 

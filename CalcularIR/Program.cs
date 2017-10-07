@@ -38,13 +38,26 @@ namespace CalcularIR
             if (contribuintes.Count > 0)
             {
                 double salarioMinimo = LerNumero("Informe o salário mínimo em vigor:");
+                // Prepara a calculadora de IR.
                 CalculadoraIR calculadora = new CalculadoraIR(salarioMinimo);
-                // calculadora.AddDesconto(new RegraDescontoGeral());
+                calculadora.AdicionarDesconto(delegate (Contribuinte c)
+                {
+                    return c.TotalDependentes * .05 * salarioMinimo;
+                });
+
+                calculadora.AdicionarAliquota(new Aliquota(0, 2, 0));
+                calculadora.AdicionarAliquota(new Aliquota(2, 4, .075));
+                calculadora.AdicionarAliquota(new Aliquota(4, 5, .15));
+                calculadora.AdicionarAliquota(new Aliquota(5, 7, .225));
+                calculadora.AdicionarAliquota(new Aliquota(7, 0, .275));
+
                 Console.WriteLine();
                 Console.WriteLine("Calculando IRs...");
                 for (int i = 0; i < contribuintes.Count; i++)
                 {
-                    contribuintes[i].ImpostoDeRendaDevido = calculadora.CalcularIR(contribuintes[i].RendaBrutaMensal, contribuintes[i].TotalDependentes);
+                    contribuinte = contribuintes[i];
+                    calculadora.CalcularIR(ref contribuinte);
+                    contribuintes[i] = contribuinte;
                 }
                 ExibirResultado(contribuintes);
             }
@@ -79,7 +92,7 @@ namespace CalcularIR
             contribuintes = contribuintes.OrderBy(c => c.ImpostoDeRendaDevido).ThenBy(c => c.Nome).ToList();
             for (int i = 0; i < contribuintes.Count; i++)
             {
-                Console.WriteLine(string.Format("{0}, com renda bruta de {1:C}, imposto devido: {2:C}", contribuintes[i].Nome.ToUpper, contribuintes[i].RendaBrutaMensal, contribuintes[i].ImpostoDeRendaDevido));
+                Console.WriteLine(string.Format("{0}, com renda bruta de {1:C}, imposto devido: {2:C}", contribuintes[i].Nome.ToUpper(), contribuintes[i].RendaBrutaMensal, contribuintes[i].ImpostoDeRendaDevido));
             }
             Console.WriteLine("".PadRight(Console.WindowWidth, '='));
         }
