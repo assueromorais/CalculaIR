@@ -92,7 +92,7 @@ namespace CalcularIR
             contribuintes = contribuintes.OrderBy(c => c.ImpostoDeRendaDevido).ThenBy(c => c.Nome).ToList();
             for (int i = 0; i < contribuintes.Count; i++)
             {
-                Console.WriteLine(string.Format("{0}, com renda bruta de {1:C}, imposto devido: {2:C}", contribuintes[i].Nome.ToUpper(), contribuintes[i].RendaBrutaMensal, contribuintes[i].ImpostoDeRendaDevido));
+                Console.WriteLine(string.Format("{0} - Imposto devido: {2:C}", contribuintes[i].Nome.ToUpper(), contribuintes[i].RendaBrutaMensal, contribuintes[i].ImpostoDeRendaDevido));
             }
             Console.WriteLine("".PadRight(Console.WindowWidth, '='));
         }
